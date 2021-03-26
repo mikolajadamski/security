@@ -1,5 +1,6 @@
 package com.example.security.user;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -24,20 +25,24 @@ public class UserManagementController {
                 .orElseThrow(() -> new IllegalStateException("User with id "+userId+" does not exists"));
     }
 
-    @GetMapping()
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
     public List<User> getAllUsers(){
         return USERS;
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('user:write')")
     public void addUser(@RequestBody User user){
         System.out.println(user);
     }
     @DeleteMapping(path = "{userId}")
+    @PreAuthorize("hasAuthority('user:write')")
     public void deleteUser(@PathVariable("userId") UUID userId) {
         System.out.println(userId);
     }
 
+    @PreAuthorize("hasAuthority('user:write')")
     @PutMapping(path="{userId}")
     public void updateUser(@PathVariable("userId") UUID userId, @RequestBody User user){
         System.out.println(user);
