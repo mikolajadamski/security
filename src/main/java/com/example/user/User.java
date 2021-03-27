@@ -1,4 +1,4 @@
-package com.example.security.user;
+package com.example.user;
 
 import java.util.UUID;
 

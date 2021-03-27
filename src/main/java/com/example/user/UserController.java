@@ -1,4 +1,4 @@
-package com.example.security.user;
+package com.example.user;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
